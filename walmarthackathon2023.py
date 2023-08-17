@@ -99,6 +99,10 @@ if section == "Inventory Optimization":
         plt.figure(figsize=(10, 6))
         plt.bar(np.arange(1, num_products + 1), optimized_inventory)
         plt.xlabel('Product')
+        plt.ylabel('Optimized Inventory Level')
+        plt.title(f'Optimized Inventory Levels for {warehouse}')
+        st.pyplot(plt)
+        st.markdown("---")
         
     st.subheader("Deep Insight about our Machine Learning Model")
     st.write("Our Inventory Optimization Model is powered by sophisticated mathematical algorithms and data-driven insights, "
