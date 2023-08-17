@@ -321,6 +321,7 @@ elif section == "Warehouse Optimization":
         st.pyplot(fig)
 
     elif warehouse_tabs == "Model B":
+        
         st.subheader("Warehouse Optimization Model B")
         st.write("Explain your second warehouse optimization model and its approach.")
         np.random.seed(42)
@@ -355,73 +356,71 @@ elif section == "Warehouse Optimization":
 
         data.append([timestamp, new_id, equipment_name, temperature, pressure, vibration, oil_level,
                  voltage, current, load, speed, error_code, maintenance_required, warehouse])
-
-    columns = ['Timestamp', 'Equipment_ID', 'Equipment_Name', 'Temperature', 'Pressure', 'Vibration', 'Oil_Level',
+        columns = ['Timestamp', 'Equipment_ID', 'Equipment_Name', 'Temperature', 'Pressure', 'Vibration', 'Oil_Level',
            'Voltage', 'Current', 'Load', 'Speed', 'Error_Code', 'Maintenance_Required', 'Warehouse']
-    df = pd.DataFrame(data, columns=columns)
-    df['Date'] = df['Timestamp'].dt.date
-    df['Time'] = df['Timestamp'].dt.time
-    df.drop(columns=['Timestamp'], inplace=True)
+        df = pd.DataFrame(data, columns=columns)
+        df['Date'] = df['Timestamp'].dt.date
+        df['Time'] = df['Timestamp'].dt.time
+        df.drop(columns=['Timestamp'], inplace=True)
 
-    X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
-    y = df['Maintenance_Required']
+        X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
+        y = df['Maintenance_Required']
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
-    model = RandomForestClassifier()
-    model.fit(X_train, y_train)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
+        model = RandomForestClassifier()
+        model.fit(X_train, y_train)
 
-    X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
-    predictions = model.predict(X_test)
-    current_year = datetime.now().year
+        X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
+        predictions = model.predict(X_test)
+        current_year = datetime.now().year
+        for idx, prediction in enumerate(predictions):
+            equipment_row = df.iloc[X_test.index[idx]]
+            equipment_name = equipment_row['Equipment_Name']
+            maintenance_required = 'Maintenance may be required.' if prediction == 1 else 'Maintenance is not immediately required.'
+        if prediction == 1:
+            estimated_year = current_year + np.random.randint(1, 6)  # Maintenance needed within 1 to 5 years
+            estimated_time = datetime.now().replace(year=estimated_year) + timedelta(days=np.random.randint(1, 366))
+            print(f"Estimated Maintenance Year: {estimated_year}")
+        else:
+            print(f"For {equipment_name}: {maintenance_required}")
 
-    for idx, prediction in enumerate(predictions):
-        equipment_row = df.iloc[X_test.index[idx]]
-        equipment_name = equipment_row['Equipment_Name']
-        maintenance_required = 'Maintenance may be required.' if prediction == 1 else 'Maintenance is not immediately required.'
+        pickle_out = open('best_model_with_time.pkl', 'wb')
+        pickle.dump(model, pickle_out)
+        pickle_out.close()
 
-    if prediction == 1:
-        estimated_year = current_year + np.random.randint(1, 6)  # Maintenance needed within 1 to 5 years
-        estimated_time = datetime.now().replace(year=estimated_year) + timedelta(days=np.random.randint(1, 366))
-        print(f"Estimated Maintenance Year: {estimated_year}")
-    else:
-        print(f"For {equipment_name}: {maintenance_required}")
-
-    pickle_out = open('best_model_with_time.pkl', 'wb')
-    pickle.dump(model, pickle_out)
-    pickle_out.close()
-
-    joblib.dump(model, 'best_model_with_time.joblib')
-    def main():
-        st.title("Equipment Maintenance Predictor")
-        st.header("Enter Equipment Data for Maintenance Prediction")
-        temperature = st.number_input("Temperature", value=20.0)
-        pressure = st.number_input("Pressure", value=1000.0)
-        vibration = st.number_input("Vibration", value=0.5)
-        oil_level = st.number_input("Oil Level", value=50.0)
-        voltage = st.number_input("Voltage", value=220.0)
-        current = st.number_input("Current", value=10.0)
-        load = st.number_input("Load", value=50.0)
-        speed = st.number_input("Speed", value=60.0)
-        predict_button = st.button("Predict Maintenance")
-        if predict_button:
-            input_data = pd.DataFrame({
-                'Temperature': [temperature],
-                'Pressure': [pressure],
-                'Vibration': [vibration],
-                'Oil_Level': [oil_level],
-                'Voltage': [voltage],
-                'Current': [current],
-                'Load': [load],
-                'Speed': [speed]})
-        prediction_results = predict_maintenance(model, input_data)
-        st.header("Maintenance Prediction Results")
-        for result in prediction_results:
-            equipment_name, maintenance_required, estimated_year = result
-        st.write(f"For {equipment_name}: {maintenance_required}")
-        if estimated_year:
-            st.write(f"Estimated Maintenance Year: {estimated_year}")
-    if __name__ == "__main__":
-        main()
+        joblib.dump(model, 'best_model_with_time.joblib')
+        
+        def main():
+            st.title("Equipment Maintenance Predictor")
+            st.header("Enter Equipment Data for Maintenance Prediction")
+            temperature = st.number_input("Temperature", value=20.0)
+            pressure = st.number_input("Pressure", value=1000.0)
+            vibration = st.number_input("Vibration", value=0.5)
+            oil_level = st.number_input("Oil Level", value=50.0)
+            voltage = st.number_input("Voltage", value=220.0)
+            current = st.number_input("Current", value=10.0)
+            load = st.number_input("Load", value=50.0)
+            speed = st.number_input("Speed", value=60.0)
+            predict_button = st.button("Predict Maintenance")
+            if predict_button:
+                input_data = pd.DataFrame({
+                    'Temperature': [temperature],
+                    'Pressure': [pressure],
+                    'Vibration': [vibration],
+                    'Oil_Level': [oil_level],
+                    'Voltage': [voltage],
+                    'Current': [current],
+                    'Load': [load],
+                    'Speed': [speed]})
+            prediction_results = predict_maintenance(model, input_data)
+            st.header("Maintenance Prediction Results")
+            for result in prediction_results:
+                equipment_name, maintenance_required, estimated_year = result
+            st.write(f"For {equipment_name}: {maintenance_required}")
+            if estimated_year:
+                st.write(f"Estimated Maintenance Year: {estimated_year}")
+        if __name__ == "__main__":
+            main()
             
     elif warehouse_tabs =="Model C":
         np.random.seed(0)
