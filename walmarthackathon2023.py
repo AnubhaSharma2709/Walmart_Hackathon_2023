@@ -19,7 +19,6 @@ from sklearn.cluster import KMeans
 st.title("Walmart Sparkathon")
 
 st.header("Problem Statement: Supply Chain and Analysis Approach")
-st.write("Write a brief description of the problem statement.")
 
 # Inventory Optimization Section
 st.sidebar.title("Navigation")
@@ -144,102 +143,36 @@ if section == "Inventory Optimization":
 # Store Optimization Section
 elif section == "Store Optimization":
     st.header("Store Optimization")
-    store_tabs = st.sidebar.radio("Select Model", ("Model 1", "Model 2", "Model 3"))
-    if store_tabs == "Model 1":
-        st.subheader("Store Optimization Model 1")
-        st.write("Explain your first store optimization model and its approach.")
-        def generate_random_profitability_data(num_locations=100):
-            np.random.seed(42)
-            locations = [f'Location_{i+1}' for i in range(num_locations)]
-            data = {
-                'Location': np.random.randint(10, 100, num_locations),
-                'Population': np.random.randint(10000, 500000, num_locations),
-                'CompetitionStrength': np.random.uniform(0.1, 0.9, num_locations),
-                'IncomeLevel': np.random.randint(20000, 80000, num_locations),
-                'RentCost': np.random.randint(5000, 20000, num_locations)}
-            profitability_data = pd.DataFrame(data)
-            profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \
-                                      1000 * profitability_data['CompetitionStrength'] + \
-                                      10 * profitability_data['IncomeLevel'] - \
-                                      2 * profitability_data['RentCost'] + \
-                                      np.random.normal(0, 5000, num_locations)
+    store_tabs = st.sidebar.radio("Select Model", ("Location Prediction", "Model 2", "Model 3"))
+    if store_tabs == "Location Prediction":
+        st.title("Store Optimization and Profitability Prediction")
+        st.header("Store Optimization:")
+        st.write("Store optimization refers to the strategic management and enhancement of retail store performance to achieve the highest level of operational efficiency, customer satisfaction, and profitability. This comprehensive approach involves a meticulous analysis of diverse factors, including store layout, inventory management, staffing, pricing strategies, and more. The objective is to ensure optimal allocation of resources, aligning with business goals. By undertaking store optimization initiatives, retailers aim to not only enrich the overall shopping experience but also to maximize revenue while minimizing costs.")
+        st.header("Why Store Optimization is Essential:")
+        st.write("Store optimization holds substantial significance for several compelling reasons:")
+        st.write("1. **Efficiency**: The optimization of store operations results in streamlined processes, waste reduction, and the efficient allocation of resources. This contributes to heightened operational efficiency.")
+        st.write("2. **Customer Experience**: A well-optimized store encompasses aspects like an inviting layout, well-managed inventory, and exceptional customer service. These factors collectively create a positive shopping experience, fostering customer loyalty and repeat business.")
+        st.write("3. **Profitability**: Through the fine-tuning of inventory levels, strategic pricing approaches, and effective product placement, stores can experience increased sales and ultimately enhanced profitability.")
+        st.write("4. **Data-Informed Decisions**: Store optimization is rooted in data analysis, empowering retailers to make informed decisions that adapt to shifting market trends and evolving customer preferences.")
+        st.write("5. **Competitive Edge**: Well-optimized stores have the potential to outshine competitors by offering superior customer service and an aesthetically pleasing shopping environment.")
 
-        def train_profitability_model():
-            profitability_data = pd.read_csv('profitability_data.csv')
-            X = profitability_data.drop(['Location', 'Profitability'], axis=1)
-            y = profitability_data['Profitability']
-            model = LinearRegression()
-            model.fit(X, y)
-            joblib.dump(model, 'profitability_model.pkl')
-        def predict_profitability(location_data):
-            loaded_model = joblib.load('profitability_model.pkl')
-            X = location_data.drop(['Location'], axis=1)
-            predicted_profitability = loaded_model.predict(X)[0]
-            return predicted_profitability
-            
-        def simulate_profit_over_5_years(initial_profit, growth_rate=0.05):
-            years = np.arange(1, 6)
-            profits = initial_profit * (1 + growth_rate) ** years
-            return years, profits
-            
-        def predict_warehouse_and_inventory(location_data):
-            nearest_warehouse = np.random.choice(['Warehouse_A', 'Warehouse_B', 'Warehouse_C'])
-            distance_to_warehouse = np.random.uniform(1, 10)
-            recommended_inventory = location_data['Population'] * 0.02 + distance_to_warehouse * 50
-            return nearest_warehouse, distance_to_warehouse, recommended_inventory.item()
-            
-        def recommend_products_for_inventory(location_data, num_products=5):
-            products = ['Product_A', 'Product_B', 'Product_C', 'Product_D', 'Product_E']
-            demand = np.random.randint(100, 1000, len(products))
-            unit_cost = np.random.randint(10, 100, len(products))
-            selling_price = np.random.randint(50, 200, len(products))
-            profitability = (selling_price - unit_cost) * demand
-            product_data = pd.DataFrame({
-                'Product': products,
-                'Demand': demand,
-                'UnitCost': unit_cost,
-                'SellingPrice': selling_price,
-                'Profitability': profitability})
-            recommended_products = product_data.sort_values(by='Profitability', ascending=False).head(num_products)
-            return recommended_products
-            
-            def main():
-                st.title("Warehouse Location and Inventory Recommendation")
-                generate_random_profitability_data()
-                train_profitability_model()
-                selected_location = st.text_input("Enter the Location", "Sample_Location")
-                population = st.number_input("Enter the Population", 10000, 500000, 300000)
-                competition_strength = st.number_input("Enter the Competition Strength", 0.1, 0.9, 0.6)
-                income_level = st.number_input("Enter the Income Level", 20000, 80000, 50000)
-                rent_cost = st.number_input("Enter the Rent Cost", 5000, 20000, 15000)
-                location_data = pd.DataFrame({
-                        'Location': [selected_location],
-                        'Population': [population],
-                        'CompetitionStrength': [competition_strength],
-                        'IncomeLevel': [income_level],
-                        'RentCost': [rent_cost]})
-                predicted_profitability = predict_profitability(location_data)
-                st.write(f"Predicted Profitability for {selected_location}: {predicted_profitability:.2f}")
-                initial_profit = predicted_profitability
-                years, profits = simulate_profit_over_5_years(initial_profit)
-                st.plotly_chart(plt.plot(years, profits, marker='o'))
-                nearest_warehouse, distance_to_warehouse, recommended_inventory = predict_warehouse_and_inventory(location_data)
-                st.write(f"Nearest Warehouse: {nearest_warehouse}")
-                st.write(f"Distance to Warehouse: {distance_to_warehouse:.2f} miles")
-                st.write(f"Recommended Inventory: {recommended_inventory:.0f}")
-                recommended_products = recommend_products_for_inventory(location_data)
-                st.write("Recommended Products for Inventory:")
-                st.write(recommended_products)
-                plt.figure(figsize=(10, 6))
-                plt.bar(recommended_products['Product'], recommended_products['Profitability'])
-                plt.xlabel('Product')
-                plt.ylabel('Profitability')
-                plt.title('Recommended Products for Inventory')
-                plt.xticks(rotation=45)
-                plt.tight_layout()
-                st.pyplot(plt)
-            if __name__ == "__main__":
-                main()
+        
+        #image = "path_to_your_image.jpg"
+        #st.image(image, caption='Local Image', use_column_width=True)
+st.header("Model 1 - Neural Network for Profitability Prediction:")
+st.write("Neural Networks, a complex and powerful class of machine learning algorithms, are harnessed for predicting numerical values based on input features. In the context of store optimization, a Neural Network can be adeptly employed to forecast the profitability of diverse store locations, leveraging a multitude of intricate factors.")
+
+# Model Mechanism
+st.subheader("The Mechanism:")
+st.write("1. **Input Features**: Neural Networks process features such as Population, Competition Strength, Income Level, and Rent Cost of a given location.")
+st.write("2. **Training**: The Neural Network is educated using historical data, encompassing both the input features and actual profitability outcomes.")
+st.write("3. **Prediction**: Once trained, the Neural Network has the capability to predict the profitability of new locations by evaluating their input features.")
+st.write("4. **Interpretation**: Neural Networks reveal insights into the influence of each input feature on profitability through their complex interconnected layers.")
+
+# Conclusion
+st.header("Conclusion:")
+st.write("Utilizing a Neural Network for store optimization facilitates data-driven decisions regarding store modifications, openings, or closures, thereby fostering improved profitability and overall store performance.")
+st.write("It's important to note that while Neural Networks offer remarkable predictive capabilities, their implementation demands comprehensive data preprocessing, model tuning, and potentially more computational resources compared to simpler algorithms. The choice of algorithm should be tailored to the complexity and objectives of the specific store optimization task.")
 
     elif store_tabs == "Model 2":
         st.subheader("Store Optimization Model 2")
