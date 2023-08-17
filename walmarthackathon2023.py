@@ -364,5 +364,5 @@ elif section == "Warehouse Optimization":
 
 # Home Section
 else:
-    st.write("Welcome to the Walmart Hackathon website!")
+    st.write("Welcome to our Walmart Hackathon website!")
     st.write("Use the sidebar to navigate to different sections.")
