@@ -347,4 +347,15 @@ else:
     st.write("Welcome to the Walmart Hackathon website!")
     st.write("Use the sidebar to navigate to different sections.")
 
-# Display any additional content or images as needed
+requirements = [
+    "numpy",
+    "pandas,
+    "scikit-learn",
+    "scipy",
+    "matplotlib",
+    "joblib",
+    "streamlit"
+]
+
+with open("requirements.txt", "w") as file:
+    file.write("\n".join(requirements))
