@@ -239,7 +239,7 @@ elif section == "Store Optimization":
                 plt.tight_layout()
                 st.pyplot(plt)
             if __name__ == "__main__":
-                 main()
+                main()
 
     elif store_tabs == "Model 2":
         st.subheader("Store Optimization Model 2")
