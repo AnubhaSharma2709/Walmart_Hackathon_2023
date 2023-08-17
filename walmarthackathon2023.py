@@ -142,37 +142,38 @@ if section == "Inventory Optimization":
 
 # Store Optimization Section
 elif section == "Store Optimization":
-    st.header("Store Optimization")
-    store_tabs = st.sidebar.radio("Select Model", ("Location Prediction", "Model 2", "Model 3"))
+    st.header("Store Optimization:")
+    st.write("Store optimization refers to the strategic management and enhancement of retail store performance to achieve the highest level of operational efficiency, customer satisfaction, and profitability. This comprehensive approach involves a meticulous analysis of diverse factors, including store layout, inventory management, staffing, pricing strategies, and more. The objective is to ensure optimal allocation of resources, aligning with business goals. By undertaking store optimization initiatives, retailers aim to not only enrich the overall shopping experience but also to maximize revenue while minimizing costs.")
+    st.header("Why Store Optimization is Essential:")
+    st.write("Store optimization holds substantial significance for several compelling reasons:")
+    st.write("1. **Efficiency**: The optimization of store operations results in streamlined processes, waste reduction, and the efficient allocation of resources. This contributes to heightened operational efficiency.")
+    st.write("2. **Customer Experience**: A well-optimized store encompasses aspects like an inviting layout, well-managed inventory, and exceptional customer service. These factors collectively create a positive shopping experience, fostering customer loyalty and repeat business.")
+    st.write("3. **Profitability**: Through the fine-tuning of inventory levels, strategic pricing approaches, and effective product placement, stores can experience increased sales and ultimately enhanced profitability.")
+    st.write("4. **Data-Informed Decisions**: Store optimization is rooted in data analysis, empowering retailers to make informed decisions that adapt to shifting market trends and evolving customer preferences.")
+    st.write("5. **Competitive Edge**: Well-optimized stores have the potential to outshine competitors by offering superior customer service and an aesthetically pleasing shopping environment.")
+    store_tabs = st.sidebar.radio("Select Model", ("Location Prediction", "Model 2"))
     if store_tabs == "Location Prediction":
         st.title("Store Optimization and Profitability Prediction")
-        st.header("Store Optimization:")
-        st.write("Store optimization refers to the strategic management and enhancement of retail store performance to achieve the highest level of operational efficiency, customer satisfaction, and profitability. This comprehensive approach involves a meticulous analysis of diverse factors, including store layout, inventory management, staffing, pricing strategies, and more. The objective is to ensure optimal allocation of resources, aligning with business goals. By undertaking store optimization initiatives, retailers aim to not only enrich the overall shopping experience but also to maximize revenue while minimizing costs.")
-        st.header("Why Store Optimization is Essential:")
-        st.write("Store optimization holds substantial significance for several compelling reasons:")
-        st.write("1. **Efficiency**: The optimization of store operations results in streamlined processes, waste reduction, and the efficient allocation of resources. This contributes to heightened operational efficiency.")
-        st.write("2. **Customer Experience**: A well-optimized store encompasses aspects like an inviting layout, well-managed inventory, and exceptional customer service. These factors collectively create a positive shopping experience, fostering customer loyalty and repeat business.")
-        st.write("3. **Profitability**: Through the fine-tuning of inventory levels, strategic pricing approaches, and effective product placement, stores can experience increased sales and ultimately enhanced profitability.")
-        st.write("4. **Data-Informed Decisions**: Store optimization is rooted in data analysis, empowering retailers to make informed decisions that adapt to shifting market trends and evolving customer preferences.")
-        st.write("5. **Competitive Edge**: Well-optimized stores have the potential to outshine competitors by offering superior customer service and an aesthetically pleasing shopping environment.")
-
+        st.header("Machine Learning Model")
+        image1 = "output_1.png"
+        st.image(image1, caption='Local Image', use_column_width=True)
+        image2 = "predict in 5 years.png"
+        st.image(image2, caption='Local Image', use_column_width=True)
+        image3 = "output_2.png"
+        st.image(image3, caption='Local Image', use_column_width=True)
+        image4 = "predict_image.png"
+        st.image(image4, caption='Local Image', use_column_width=True)
         
-        #image = "path_to_your_image.jpg"
-        #st.image(image, caption='Local Image', use_column_width=True)
-st.header("Model 1 - Neural Network for Profitability Prediction:")
-st.write("Neural Networks, a complex and powerful class of machine learning algorithms, are harnessed for predicting numerical values based on input features. In the context of store optimization, a Neural Network can be adeptly employed to forecast the profitability of diverse store locations, leveraging a multitude of intricate factors.")
-
-# Model Mechanism
-st.subheader("The Mechanism:")
-st.write("1. **Input Features**: Neural Networks process features such as Population, Competition Strength, Income Level, and Rent Cost of a given location.")
-st.write("2. **Training**: The Neural Network is educated using historical data, encompassing both the input features and actual profitability outcomes.")
-st.write("3. **Prediction**: Once trained, the Neural Network has the capability to predict the profitability of new locations by evaluating their input features.")
-st.write("4. **Interpretation**: Neural Networks reveal insights into the influence of each input feature on profitability through their complex interconnected layers.")
-
-# Conclusion
-st.header("Conclusion:")
-st.write("Utilizing a Neural Network for store optimization facilitates data-driven decisions regarding store modifications, openings, or closures, thereby fostering improved profitability and overall store performance.")
-st.write("It's important to note that while Neural Networks offer remarkable predictive capabilities, their implementation demands comprehensive data preprocessing, model tuning, and potentially more computational resources compared to simpler algorithms. The choice of algorithm should be tailored to the complexity and objectives of the specific store optimization task.")
+        st.header("Neural Network for Profitability Prediction:")
+        st.write("Neural Networks, a complex and powerful class of machine learning algorithms, are harnessed for predicting numerical values based on input features. In the context of store optimization, a Neural Network can be adeptly employed to forecast the profitability of diverse store locations, leveraging a multitude of intricate factors.")
+        st.subheader("The Mechanism:")
+        st.write("1. **Input Features**: Neural Networks process features such as Population, Competition Strength, Income Level, and Rent Cost of a given location.")
+        st.write("2. **Training**: The Neural Network is educated using historical data, encompassing both the input features and actual profitability outcomes.")
+        st.write("3. **Prediction**: Once trained, the Neural Network has the capability to predict the profitability of new locations by evaluating their input features.")
+        st.write("4. **Interpretation**: Neural Networks reveal insights into the influence of each input feature on profitability through their complex interconnected layers.")
+        st.header("Conclusion:")
+        st.write("Utilizing a Neural Network for store optimization facilitates data-driven decisions regarding store modifications, openings, or closures, thereby fostering improved profitability and overall store performance.")
+        st.write("It's important to note that while Neural Networks offer remarkable predictive capabilities, their implementation demands comprehensive data preprocessing, model tuning, and potentially more computational resources compared to simpler algorithms. The choice of algorithm should be tailored to the complexity and objectives of the specific store optimization task.")
 
     elif store_tabs == "Model 2":
         st.subheader("Store Optimization Model 2")
