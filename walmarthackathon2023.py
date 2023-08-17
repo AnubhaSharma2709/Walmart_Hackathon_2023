@@ -220,7 +220,7 @@ elif section == "Warehouse Optimization":
     #st.image(warehouse_image, use_column_width=True)
 
     # Tabs for different models
-    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
+    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B","Model C"))
     
     if warehouse_tabs == "Warehouse Storage Location":
         from sklearn.cluster import KMeans
@@ -342,7 +342,46 @@ elif section == "Warehouse Optimization":
         st.write(f"For {equipment_name}: {maintenance_required}")
         if estimated_year:
             st.write(f"Estimated Maintenance Year: {estimated_year}")
-
+    elif warehouse_tabs =="Model C":
+        np.random.seed(0)
+        n_records = 1000  # 1 crore
+        categories = ["Electronics", "Clothing"]
+        subcategories = ["Laptops", "Smartphones", "Shirts", "Pants"]
+        warehouses = ["Warehouse_A", "Warehouse_B", "Warehouse_C", "Warehouse_D", "Warehouse_E"]
+        data = {
+            "ProductID": np.arange(n_records),
+            "Category": np.random.choice(categories, n_records),
+            "Subcategory": np.random.choice(subcategories, n_records),
+            "Warehouse": np.random.choice(warehouses, n_records),
+            "Latitude": np.random.uniform(37.0, 40.0, n_records),
+            "Longitude": np.random.uniform(-125.0, -121.0, n_records)}
+        df = pd.DataFrame(data)
+        n_clusters = len(df['Warehouse'].unique())
+        kmeans = KMeans(n_clusters=n_clusters, random_state=0)
+        df['StorageLocation'] = kmeans.fit_predict(df[['Latitude', 'Longitude']])
+        def main():
+            st.title("Warehouse Location Visualization")
+            selected_warehouse = st.selectbox("Select a Warehouse:", warehouses)
+            selected_category = st.selectbox("Select a Category:", categories)
+            selected_subcategory = st.selectbox("Select a Subcategory:", subcategories)
+            selected_data = df[
+            (df['Warehouse'] == selected_warehouse) &
+            (df['Category'] == selected_category) &
+            (df['Subcategory'] == selected_subcategory)]
+        if not selected_data.empty:
+            st.write(f"Storage Location: **{selected_data['StorageLocation'].values[0]}**")
+        plt.figure(figsize=(10, 6))
+        plt.scatter(selected_data['Latitude'], selected_data['Longitude'], c=selected_data['StorageLocation'], cmap='viridis', marker='o')
+        plt.title(f'Scatter Plot of Warehouse: {selected_warehouse}, Category: {selected_category}, Subcategory: {selected_subcategory}')
+        plt.xlabel('Latitude')
+        plt.ylabel('Longitude')
+        plt.colorbar(label='Storage Location')
+        for index, row in selected_data.iterrows():
+            plt.text(row['Latitude'], row['Longitude'], f"Product ID: {row['ProductID']}", fontsize=8, ha='left', va='bottom', color='black')
+        plt.tight_layout()
+        st.pyplot(plt)
+    else:
+        st.write("No data available for the selected criteria.")
 
 # Home Section
 else:
