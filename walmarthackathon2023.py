@@ -325,9 +325,9 @@ elif section == "Warehouse Optimization":
         existing_ids = set()
         data = []
         for _ in range(num_samples):
-            new_id = np.random.randint(1, 10001)
+            new_id = np.random.randint(1, 1001)
             while new_id in existing_ids:
-                new_id = np.random.randint(1, 10001)
+                new_id = np.random.randint(1, 1001)
         existing_ids.add(new_id)
         equipment_name = np.random.choice(['Machine', 'Device', 'Unit', 'Tool', 'Apparatus', 'Instrument', 'Appliance', 'Gadget'])
         timestamp = start_date + pd.to_timedelta(np.random.randint(1, 43201), unit='m')
@@ -357,10 +357,10 @@ elif section == "Warehouse Optimization":
         df.drop(columns=['Timestamp'], inplace=True)
         X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
         y = df['Maintenance_Required']
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=10)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
         model = RandomForestClassifier()
         model.fit(X_train, y_train)
-        X_test = X_test.sample(n=10, random_state=10)  # Select a subset for testing
+        X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
         predictions = model.predict(X_test)
         current_year = datetime.now().year
         for idx, prediction in enumerate(predictions):
