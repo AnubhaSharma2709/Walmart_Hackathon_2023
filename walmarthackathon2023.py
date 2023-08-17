@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import train_test_split
 from scipy.optimize import minimize  # Import the minimize function
+from sklearn.cluster import KMeans
+
 
 
 # Front Page
