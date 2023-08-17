@@ -326,9 +326,11 @@ elif section == "Warehouse Optimization":
         data = []
         for _ in range(num_samples):
             new_id = np.random.randint(1, 1001)
-            while new_id in existing_ids:
-                new_id = np.random.randint(1, 1001)
+        while new_id in existing_ids:
+        new_id = np.random.randint(1, 1001)
+        
         existing_ids.add(new_id)
+    
         equipment_name = np.random.choice(['Machine', 'Device', 'Unit', 'Tool', 'Apparatus', 'Instrument', 'Appliance', 'Gadget'])
         timestamp = start_date + pd.to_timedelta(np.random.randint(1, 43201), unit='m')
         temperature = np.random.normal(-10, 25)
@@ -349,35 +351,43 @@ elif section == "Warehouse Optimization":
 
         data.append([timestamp, new_id, equipment_name, temperature, pressure, vibration, oil_level,
                  voltage, current, load, speed, error_code, maintenance_required, warehouse])
-        columns = ['Timestamp', 'Equipment_ID', 'Equipment_Name', 'Temperature', 'Pressure', 'Vibration', 'Oil_Level',
-           'Voltage', 'Current', 'Load', 'Speed', 'Error_Code', 'Maintenance_Required', 'Warehouse']
-        df = pd.DataFrame(data, columns=columns)
-        df['Date'] = df['Timestamp'].dt.date
-        df['Time'] = df['Timestamp'].dt.time
-        df.drop(columns=['Timestamp'], inplace=True)
-        X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
-        y = df['Maintenance_Required']
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
-        model = RandomForestClassifier()
-        model.fit(X_train, y_train)
-        X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
-        predictions = model.predict(X_test)
-        current_year = datetime.now().year
-        for idx, prediction in enumerate(predictions):
-            equipment_row = df.iloc[X_test.index[idx]]
-            equipment_name = equipment_row['Equipment_Name']
-            maintenance_required = 'Maintenance may be required.' if prediction == 1 else 'Maintenance is not immediately required.'
-        if prediction == 1:
-            estimated_year = current_year + np.random.randint(1, 6)  # Maintenance needed within 1 to 5 years
-            estimated_time = datetime.now().replace(year=estimated_year) + timedelta(days=np.random.randint(1, 366))
-            print(f"Estimated Maintenance Year: {estimated_year}")
-        else:
-            print(f"For {equipment_name}: {maintenance_required}")
-        pickle_out = open('best_model_with_time.pkl', 'wb')
-        pickle.dump(model, pickle_out)
-        pickle_out.close()
 
-        joblib.dump(model, 'best_model_with_time.joblib')
+    columns = ['Timestamp', 'Equipment_ID', 'Equipment_Name', 'Temperature', 'Pressure', 'Vibration', 'Oil_Level',
+           'Voltage', 'Current', 'Load', 'Speed', 'Error_Code', 'Maintenance_Required', 'Warehouse']
+    df = pd.DataFrame(data, columns=columns)
+    df['Date'] = df['Timestamp'].dt.date
+    df['Time'] = df['Timestamp'].dt.time
+    df.drop(columns=['Timestamp'], inplace=True)
+
+    X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
+    y = df['Maintenance_Required']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+
+    X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
+    predictions = model.predict(X_test)
+    current_year = datetime.now().year
+
+    for idx, prediction in enumerate(predictions):
+        equipment_row = df.iloc[X_test.index[idx]]
+        equipment_name = equipment_row['Equipment_Name']
+        maintenance_required = 'Maintenance may be required.' if prediction == 1 else 'Maintenance is not immediately required.'
+
+    if prediction == 1:
+        estimated_year = current_year + np.random.randint(1, 6)  # Maintenance needed within 1 to 5 years
+        estimated_time = datetime.now().replace(year=estimated_year) + timedelta(days=np.random.randint(1, 366))
+        print(f"Estimated Maintenance Year: {estimated_year}")
+    else:
+        print(f"For {equipment_name}: {maintenance_required}")
+
+    pickle_out = open('best_model_with_time.pkl', 'wb')
+    pickle.dump(model, pickle_out)
+    pickle_out.close()
+
+    joblib.dump(model, 'best_model_with_time.joblib')
+
         def main():
             st.title("Equipment Maintenance Predictor")
             st.header("Enter Equipment Data for Maintenance Prediction")
