@@ -19,8 +19,8 @@ from sklearn.cluster import KMeans
 st.title("Walmart Sparkathon")
 
 st.header("Problem Statement: Supply Chain")
-st.header("Supply chain is the process of transporting a commercial product from its point of origin to its end customers"
-          "It is a network of people, organizations, resources, activities, and technology involved in delivering a product to a client").
+st.header("Supply chain is the process of transporting a commercial product from its point of origin to its end customers")
+st.header( "It is a network of people, organizations, resources, activities, and technology involved in delivering a product to a client").
 
 
 
