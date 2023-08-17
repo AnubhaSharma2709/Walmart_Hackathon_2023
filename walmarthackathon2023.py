@@ -232,11 +232,22 @@ elif section == "Store Optimization":
         st.write("After learning, the algorithm determines the optimal prices for each product (optimal_prices) by selecting the action (price) that yields the highest expected reward for each state (product). The total revenue (total_revenue) is calculated based on the optimal prices and product demand.")
 
 elif section == "Warehouse Optimization":
-    st.header("Warehouse Optimization")
+    st.title("Warehouse Layout Optimization")
+    st.header("Why Warehouse Optimization is Required:")
+    st.write("Warehouse optimization is essential for several reasons:")
+    st.write("1. **Efficiency**: An optimized warehouse layout minimizes the time and effort required to locate and retrieve products, resulting in improved operational efficiency and reduced labor costs.")
+    st.write("2. **Inventory Management**: Efficient warehouse layout ensures proper organization of inventory, reducing the risk of stockouts and overstocking, which can lead to higher holding costs and lost sales opportunities.")
+    st.write("3. **Order Fulfillment**: An optimized layout enables faster and more accurate order picking, packing, and shipping, leading to improved customer satisfaction and retention.")
+    st.write("4. **Space Utilization**: Proper warehouse organization maximizes the use of available space, reducing storage costs and enabling the accommodation of increased inventory without the need for additional warehouse space.")
+    st.write("5. **Cost Savings**: Efficient layouts minimize unnecessary movement of goods and personnel, reducing operational costs and improving resource allocation.")
 
-    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse", " Maintenance Prediction", "OptmizingWarehouseStorage"))
+
+    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse", "Maintenance Prediction", "OptmizingWarehouseStorage"))
     
-    if warehouse_tabs == "Warehouse Storage Location":
+    if warehouse_tabs == "Warehouse":
+        st.header("Warehouse Layout Optimization:")
+        st.write("Warehouse optimization involves strategically arranging products within a warehouse to enhance operational efficiency and minimize costs. This process ensures that products are stored, picked, and shipped in the most efficient manner, thereby improving overall supply chain performance. Effective warehouse layout optimization can lead to reduced labor costs, faster order fulfillment, and optimized space utilization.")
+
         from sklearn.cluster import KMeans
         np.random.seed(42)
         num_products = 100
@@ -265,110 +276,42 @@ elif section == "Warehouse Optimization":
         ax.set_title(f'Optimized Warehouse Layout for Warehouse {selected_warehouse}')
         ax.legend()
         st.pyplot(fig)
+        st.header("Model Explanation - Warehouse Layout Optimization:")
+        st.write("The provided code demonstrates warehouse layout optimization using KMeans clustering and visualization techniques. Here's an explanation of the steps involved:")
+        st.subheader("Step 1: Data Generation")
+        st.write("Random demand patterns are generated for a given number of products and warehouses. Each demand pattern represents the demand of a product across different warehouses.")
+        st.subheader("Step 2: KMeans Clustering")
+        st.write("KMeans clustering is applied to group products with similar demand patterns into clusters. This helps in identifying products that share similar storage and handling requirements.")
+        st.subheader("Step 3: Warehouse and Product Data Preparation")
+        st.write("Warehouse and product data are created, including warehouse locations (latitude and longitude) and product-cluster assignments.")
+        st.subheader("User Input")
+        st.write("The user selects a warehouse for which the optimized layout will be displayed.")
+        st.subheader("Step 4: Visualization")
+        st.write("The code generates a scatter plot with warehouses represented by red squares (labeled with WarehouseIDs) and products represented by colored circles (labeled with ProductIDs). Products are color-coded based on their assigned clusters.")
+        st.header("Algorithm and Machine Learning Model:")
+        st.write("The algorithm used in this model is KMeans clustering. KMeans is an unsupervised machine learning algorithm that partitions data into K clusters based on similarity. In this context, KMeans is applied to group products with similar demand patterns, allowing for effective organization and layout optimization within a warehouse.")
+        st.write("In summary, warehouse layout optimization using KMeans clustering assists in strategically organizing products within a warehouse to improve operational efficiency, reduce costs, and enhance overall supply chain performance. The visualization provides a clear understanding of how products and warehouses are arranged, facilitating better decision-making for warehouse management.")
 
-    elif warehouse_tabs == "Model B":
+
+    elif warehouse_tabs == "Maintenance Prediction":
+        st.header("Predictive Maintenance Importance:")
+        st.write("Predictive maintenance is a proactive approach that uses data analysis and machine learning algorithms to predict when equipment or machinery is likely to fail. By identifying potential issues before they lead to costly breakdowns, predictive maintenance helps organizations optimize maintenance schedules, reduce downtime, and enhance overall operational efficiency. Here's why predictive maintenance is crucial and how it contributes to various aspects:")
+        st.subheader("Importance of Predictive Maintenance:")
+        st.markdown("1. **Cost Savings**: Predictive maintenance minimizes unscheduled downtime, which can lead to substantial financial losses due to halted operations, decreased productivity, and emergency repairs.")
+        st.markdown("2. **Increased Equipment Lifespan**: By addressing issues before they escalate, predictive maintenance helps extend the lifespan of equipment, reducing the need for frequent replacements.")
+        st.markdown("3. **Efficient Resource Allocation**: Maintenance efforts are targeted based on actual equipment condition, optimizing the allocation of resources such as labor, parts, and maintenance schedules.")
+        st.markdown("4. **Improved Safety**: Anticipating equipment failures helps mitigate safety risks associated with sudden breakdowns, protecting both personnel and assets.")
+        st.markdown("5. **Data-Driven Insights**: Predictive maintenance generates valuable data insights that can be used to fine-tune maintenance strategies, improve equipment design, and optimize operational processes.")
+        st.markdown("6. **Enhanced Customer Satisfaction**: Reliable equipment and uninterrupted service contribute to better customer satisfaction and loyalty.")
+        st.write("Machine Learning Model: Random Forest Classifier")
+        st.write("The machine learning model used in this app is a Random Forest Classifier. "
+         "The Random Forest algorithm is an ensemble learning technique that constructs multiple decision trees "
+         "during training and combines their predictions to make a final decision. It is suitable for classification "
+         "tasks, such as predicting whether maintenance is needed for equipment based on sensor readings.")
         
-        st.subheader("Warehouse Optimization Model B")
-        st.write("Explain your second warehouse optimization model and its approach.")
-        np.random.seed(42)
-        num_samples = 1000  # Number of samples
-        start_date = pd.to_datetime('2023-07-01')
-        existing_ids = set()
-        data = []
-        for _ in range(num_samples):
-            new_id = np.random.randint(1, 1001)
-        while new_id in existing_ids:
-            new_id = np.random.randint(1, 1001)
-        
-        existing_ids.add(new_id)
-    
-        equipment_name = np.random.choice(['Machine', 'Device', 'Unit', 'Tool', 'Apparatus', 'Instrument', 'Appliance', 'Gadget'])
-        timestamp = start_date + pd.to_timedelta(np.random.randint(1, 43201), unit='m')
-        temperature = np.random.normal(-10, 25)
-        pressure = np.random.normal(1000, 100)
-        vibration = np.random.normal(0.5, 0.1)
-        oil_level = np.random.uniform(20, 80)
-        voltage = np.random.normal(220, 10)
-        current = np.random.normal(10, 2)
-        load = np.random.normal(50, 10)
-        speed = np.random.normal(60, 10)
 
-        error_codes = ['E101', 'E202', 'E303', 'E404', 'No Error']
-        error_code = np.random.choice(error_codes)
 
-        warehouse = np.random.choice(['Warehouse_A', 'Warehouse_B', 'Warehouse_C', 'Warehouse_D', 'Warehouse_E'])
-
-        maintenance_required = 1 if error_code != 'No Error' else 0
-
-        data.append([timestamp, new_id, equipment_name, temperature, pressure, vibration, oil_level,
-                 voltage, current, load, speed, error_code, maintenance_required, warehouse])
-        columns = ['Timestamp', 'Equipment_ID', 'Equipment_Name', 'Temperature', 'Pressure', 'Vibration', 'Oil_Level',
-           'Voltage', 'Current', 'Load', 'Speed', 'Error_Code', 'Maintenance_Required', 'Warehouse']
-        df = pd.DataFrame(data, columns=columns)
-        df['Date'] = df['Timestamp'].dt.date
-        df['Time'] = df['Timestamp'].dt.time
-        df.drop(columns=['Timestamp'], inplace=True)
-
-        X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
-        y = df['Maintenance_Required']
-
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
-        model = RandomForestClassifier()
-        model.fit(X_train, y_train)
-
-        X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
-        predictions = model.predict(X_test)
-        current_year = datetime.now().year
-        for idx, prediction in enumerate(predictions):
-            equipment_row = df.iloc[X_test.index[idx]]
-            equipment_name = equipment_row['Equipment_Name']
-            maintenance_required = 'Maintenance may be required.' if prediction == 1 else 'Maintenance is not immediately required.'
-        if prediction == 1:
-            estimated_year = current_year + np.random.randint(1, 6)  # Maintenance needed within 1 to 5 years
-            estimated_time = datetime.now().replace(year=estimated_year) + timedelta(days=np.random.randint(1, 366))
-            print(f"Estimated Maintenance Year: {estimated_year}")
-        else:
-            print(f"For {equipment_name}: {maintenance_required}")
-
-        pickle_out = open('best_model_with_time.pkl', 'wb')
-        pickle.dump(model, pickle_out)
-        pickle_out.close()
-
-        joblib.dump(model, 'best_model_with_time.joblib')
-        
-        def main():
-            st.title("Equipment Maintenance Predictor")
-            st.header("Enter Equipment Data for Maintenance Prediction")
-            temperature = st.number_input("Temperature", value=20.0)
-            pressure = st.number_input("Pressure", value=1000.0)
-            vibration = st.number_input("Vibration", value=0.5)
-            oil_level = st.number_input("Oil Level", value=50.0)
-            voltage = st.number_input("Voltage", value=220.0)
-            current = st.number_input("Current", value=10.0)
-            load = st.number_input("Load", value=50.0)
-            speed = st.number_input("Speed", value=60.0)
-            predict_button = st.button("Predict Maintenance")
-            if predict_button:
-                input_data = pd.DataFrame({
-                    'Temperature': [temperature],
-                    'Pressure': [pressure],
-                    'Vibration': [vibration],
-                    'Oil_Level': [oil_level],
-                    'Voltage': [voltage],
-                    'Current': [current],
-                    'Load': [load],
-                    'Speed': [speed]})
-            prediction_results = predict_maintenance(model, input_data)
-            st.header("Maintenance Prediction Results")
-            for result in prediction_results:
-                equipment_name, maintenance_required, estimated_year = result
-            st.write(f"For {equipment_name}: {maintenance_required}")
-            if estimated_year:
-                st.write(f"Estimated Maintenance Year: {estimated_year}")
-        if __name__ == "__main__":
-            main()
-            
-    elif warehouse_tabs =="Model C":
+    elif warehouse_tabs =="OptmizingWarehouseStorage":
         np.random.seed(0)
         n_records = 1000  # 1 crore
         categories = ["Electronics", "Clothing"]
