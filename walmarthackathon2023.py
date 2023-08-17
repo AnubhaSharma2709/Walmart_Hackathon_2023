@@ -298,7 +298,7 @@ elif section == "Warehouse Optimization":
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         model = RandomForestClassifier()
         model.fit(X_train, y_train)
-        X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
+        X_test = X_test.sample(n=10, random_state=10)  # Select a subset for testing
         predictions = model.predict(X_test)
         current_year = datetime.now().year
         for idx, prediction in enumerate(predictions):
