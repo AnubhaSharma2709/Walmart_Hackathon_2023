@@ -16,7 +16,8 @@ from sklearn.cluster import KMeans
 
 
 # Front Page
-st.title("Walmart Hackathon")
+st.title("Walmart Sparkathon")
+
 st.header("Problem Statement: Supply Chain and Analysis Approach")
 st.write("Write a brief description of the problem statement.")
 
@@ -29,7 +30,41 @@ if section == "Inventory Optimization":
     .subheader {font-size: 18px;font-weight: bold;margin-top: 16px;}
     .highlight {background-color: #f0f0f0;padding: 8px;border-radius: 4px;}</style>
     """, unsafe_allow_html=True)
-    st.title("Inventory Optimization")
+        st.header("Inventory Optimization")
+    st.write("Inventory optimization is a crucial aspect of supply chain management that aims to find the right balance between "
+             "stock levels and customer demand. It involves strategically managing inventory to minimize costs while ensuring "
+             "products are available when needed. This practice plays a vital role in enhancing supply chain efficiency and "
+             "improving overall performance.")
+    
+    #st.image("path_to_inventory_image.png", caption="Inventory Optimization", use_column_width=True)
+    
+    st.subheader("Why is Inventory Optimization Necessary?")
+    st.write("Supply chains operate in dynamic environments with varying demand, lead times, and production constraints. "
+             "Here's why inventory optimization is essential:")
+    
+    st.markdown("- **Cost Reduction:** Excess inventory ties up capital and increases storage costs, while insufficient "
+                "inventory leads to stockouts and missed opportunities.")
+    st.markdown("- **Demand Variability:** Customer demand fluctuates due to various factors. Inventory optimization helps "
+                "anticipate demand changes and prevents shortages.")
+    st.markdown("- **Lead Time Management:** Variability in lead times can disrupt supply chains. Optimized inventory "
+                "ensures products are available even with longer lead times.")
+    st.markdown("- **Supplier and Production Variability:** Supplier delays and production variations can be mitigated by "
+                "maintaining safety stock.")
+    st.markdown("- **Customer Satisfaction:** Timely availability of products enhances customer experience and reduces "
+                "stockouts.")
+    st.markdown("- **Efficient Resource Allocation:** Optimized inventory allocation frees up resources for growth and "
+                "innovation.")
+    st.markdown("- **Supply Chain Flexibility:** Inventory optimization improves the agility of supply chains to respond "
+                "to changes.")
+    st.markdown("- **Risk Mitigation:** Adequate safety stock minimizes disruptions caused by unexpected events.")
+    st.markdown("- **Waste Reduction:** Optimized inventory reduces waste by minimizing excess stock and obsolescence.")
+    st.markdown("- **Strategic Decision-Making:** Data-driven insights from inventory optimization inform strategic decisions "
+                "regarding products, pricing, and market expansion.")
+
+    st.write("By employing inventory optimization strategies, supply chains achieve cost savings, better customer service, "
+             "and improved overall performance. Machine learning and advanced analytics further enhance these strategies "
+             "by enabling accurate demand forecasting and dynamic inventory control.")
+
     np.random.seed(42)
     num_products = 10
     num_stores = 5
@@ -69,23 +104,6 @@ if section == "Inventory Optimization":
         plt.figure(figsize=(10, 6))
         plt.bar(np.arange(1, num_products + 1), optimized_inventory)
         plt.xlabel('Product')
-        plt.ylabel('Optimized Inventory Level')
-        plt.title(f'Optimized Inventory Levels for {warehouse}')
-        st.pyplot(plt)
-    st.markdown("---")
-
-    
-    # Add your inventory optimization code here
-
-    # Display image
-    #inventory_image = "path_to_inventory_image.png"  # Replace with your image path
-    #st.image(inventory_image, use_column_width=True)
-
-    # Explain the model and results
-
-    # Replace with your accuracy
-
-    # Add more content as needed
 
 # Store Optimization Section
 elif section == "Store Optimization":
