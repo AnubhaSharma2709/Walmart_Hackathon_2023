@@ -104,9 +104,9 @@ elif section == "Warehouse Optimization":
         ax.legend()
         st.pyplot(fig)
 
-elif warehouse_tabs == "Model B":
-    st.subheader("Warehouse Optimization Model B")
-    st.write("Explain your second warehouse optimization model and its approach.")
+    elif warehouse_tabs == "Model B":
+        st.subheader("Warehouse Optimization Model B")
+        st.write("Explain your second warehouse optimization model and its approach.")
 
     # Add more content as needed
 
