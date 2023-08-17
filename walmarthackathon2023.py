@@ -86,7 +86,7 @@ elif section == "Store Optimization":
                     'UnitCost': unit_cost,
                     'SellingPrice': selling_price,
                     'Profitability': profitability})
-                recommended_products = product_data.sort_values(by='Profitability', ascending=False).head(num_products):
+                recommended_products = product_data.sort_values(by='Profitability', ascending=False).head(num_products)
                 return recommended_products
                 def main():
                     st.title("Warehouse Location and Inventory Recommendation")
