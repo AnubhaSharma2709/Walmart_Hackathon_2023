@@ -237,7 +237,7 @@ elif section == "Store Optimization":
                 plt.xticks(rotation=45)
                 plt.tight_layout()
                 st.pyplot(plt)
-        if __name__ == "__main__":
+    if __name__ == "__main__":
             main()
 
     elif store_tabs == "Model 2":
