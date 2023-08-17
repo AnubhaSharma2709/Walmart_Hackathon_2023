@@ -23,9 +23,12 @@ st.write("Write a brief description of the problem statement.")
 # Inventory Optimization Section
 st.sidebar.title("Navigation")
 section = st.sidebar.radio("Go to", ("Home", "Inventory Optimization", "Store Optimization", "Warehouse Optimization"))
-
 if section == "Inventory Optimization":
-    st.header("Inventory Optimization")
+    st.markdown("""
+    <style>.header {font-size: 24px;font-weight: bold;margin-bottom: 16px;}
+    .subheader {font-size: 18px;font-weight: bold;margin-top: 16px;}
+    .highlight {background-color: #f0f0f0;padding: 8px;border-radius: 4px;}</style>
+    """, unsafe_allow_html=True)
     st.title("Inventory Optimization")
     np.random.seed(42)
     num_products = 10
@@ -53,22 +56,25 @@ if section == "Inventory Optimization":
     warehouse_names = ['Warehouse_A', 'Warehouse_B', 'Warehouse_C']
     for warehouse in warehouse_names:
         st.subheader(f"Optimizing inventory levels for {warehouse}:")
-    x0 = np.random.randint(0, initial_inventory + 1, num_products)
+        x0 = np.random.randint(0, initial_inventory + 1, num_products)
     bounds = [(0, initial_inventory[i]) for i in range(num_products)]
     constraints = [{'type': 'eq', 'fun': lambda x: balance} for balance in inventory_balance_constraints(x0)]
     result = minimize(objective_function, x0, method='SLSQP', bounds=bounds, constraints=constraints)
     optimized_inventory = result.x
-    st.write("Optimized Inventory Levels:")
+    total_optimized_cost = result.fun
+    st.subheader("Optimized Inventory Levels:")
     for i, inventory in enumerate(optimized_inventory, start=1):
         st.write(f"Product {i}: {inventory:.2f}")
-    total_optimized_cost = result.fun
     st.write(f"Total Optimized Cost: {total_optimized_cost:.2f}")
     plt.figure(figsize=(10, 6))
-    plt.bar(np.arange(1, num_products+1), optimized_inventory)
+    plt.bar(np.arange(1, num_products + 1), optimized_inventory)
     plt.xlabel('Product')
     plt.ylabel('Optimized Inventory Level')
     plt.title(f'Optimized Inventory Levels for {warehouse}')
     st.pyplot(plt)
+st.markdown("---")
+
+    
     # Add your inventory optimization code here
 
     # Display image
