@@ -73,7 +73,7 @@ elif section == "Warehouse Optimization":
 
     # Tabs for different models
     warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
-            warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
+    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
         
         if warehouse_tabs == "Warehouse Storage Location":
             st.subheader("Warehouse Optimization Model A")
