@@ -349,7 +349,7 @@ else:
 
 requirements = [
     "numpy",
-    "pandas,
+    "pandas",
     "scikit-learn",
     "scipy",
     "matplotlib",
