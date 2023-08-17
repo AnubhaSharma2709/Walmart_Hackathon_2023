@@ -59,8 +59,7 @@ if section == "Inventory Optimization":
     st.write("By employing inventory optimization strategies, supply chains achieve cost savings, better customer service, "
              "and improved overall performance. Machine learning and advanced analytics further enhance these strategies "
              "by enabling accurate demand forecasting and dynamic inventory control.")
-    st.header("Machine Learning Model")
-    st.subheader("Make the Necessary Predictions")
+    
     np.random.seed(42)
     num_products = 10
     num_stores = 5
@@ -102,38 +101,38 @@ if section == "Inventory Optimization":
         plt.xlabel('Product')
         
         st.subheader("Deep Insight about our Machine Learning Model")
-    st.write("Our Inventory Optimization Model is powered by sophisticated mathematical algorithms and data-driven insights, "
+        st.write("Our Inventory Optimization Model is powered by sophisticated mathematical algorithms and data-driven insights, "
              "all within the framework of the scikit-learn toolkit. This toolkit provides a wide range of machine learning "
              "tools and techniques that enable us to solve complex optimization problems efficiently.")
 
-    st.write("Algorithm: Mathematical Optimization using Scikit-learn")
-    st.write("The algorithm used for Inventory Optimization is based on mathematical optimization techniques provided by "
+        st.write("Algorithm: Mathematical Optimization using Scikit-learn")
+        st.write("The algorithm used for Inventory Optimization is based on mathematical optimization techniques provided by "
              "Scikit-learn. Specifically, the 'SLSQP' (Sequential Least Squares Quadratic Programming) optimization method "
              "is employed to iteratively adjust inventory levels, ensuring that costs are minimized while meeting demand "
              "requirements.")
 
-    st.write("Data Model:")
-    st.markdown("- **Demand Data:** We generate simulated demand data for different products across multiple stores, "
+        st.write("Data Model:")
+        st.markdown("- **Demand Data:** We generate simulated demand data for different products across multiple stores, "
                 "capturing the dynamic nature of customer demand.")
     
-    st.markdown("- **Cost Data:** Holding costs (related to storage and capital) and ordering costs are incorporated, "
+        st.markdown("- **Cost Data:** Holding costs (related to storage and capital) and ordering costs are incorporated, "
                 "providing a comprehensive understanding of the expenses associated with maintaining inventory.")
     
-    st.markdown("- **Constraints:** The model considers constraints to balance inventory and demand, avoiding stockouts "
+        st.markdown("- **Constraints:** The model considers constraints to balance inventory and demand, avoiding stockouts "
                 "and overstocking while achieving optimal inventory levels.")
     
-    st.write("Scikit-learn Toolkit:")
-    st.markdown("Scikit-learn is a versatile machine learning toolkit that provides powerful tools for data analysis and "
+        st.write("Scikit-learn Toolkit:")
+        st.markdown("Scikit-learn is a versatile machine learning toolkit that provides powerful tools for data analysis and "
                 "model development. It offers a wide range of algorithms, including mathematical optimization techniques, "
                 "enabling us to efficiently address inventory optimization challenges.")
     
-    st.markdown("- **Optimization:** The 'SLSQP' optimization method from Scikit-learn is at the core of our model. It "
+        st.markdown("- **Optimization:** The 'SLSQP' optimization method from Scikit-learn is at the core of our model. It "
                 "provides an effective approach to minimize costs while meeting inventory and demand constraints.")
     
-    st.markdown("- **Data Processing:** Scikit-learn's data preprocessing capabilities help us clean, transform, and "
+        st.markdown("- **Data Processing:** Scikit-learn's data preprocessing capabilities help us clean, transform, and "
                 "prepare the data for optimization, ensuring accurate and reliable results.")
     
-    st.write("By leveraging the power of the scikit-learn toolkit, our Inventory Optimization Model empowers businesses to "
+        st.write("By leveraging the power of the scikit-learn toolkit, our Inventory Optimization Model empowers businesses to "
              "optimize inventory levels, enhance supply chain efficiency, and make informed decisions for strategic growth.")
     
     
