@@ -150,16 +150,16 @@ elif section == "Store Optimization":
         st.write("Explain your first store optimization model and its approach.")
         def main():
             def generate_random_profitability_data(num_locations=100):
-            np.random.seed(42)
-            locations = [f'Location_{i+1}' for i in range(num_locations)]
-            data = {
-                'Location': np.random.randint(10, 100, num_locations),
-                'Population': np.random.randint(10000, 500000, num_locations),
-                'CompetitionStrength': np.random.uniform(0.1, 0.9, num_locations),
-                'IncomeLevel': np.random.randint(20000, 80000, num_locations),
-                'RentCost': np.random.randint(5000, 20000, num_locations)}
-            profitability_data = pd.DataFrame(data)
-            profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \1000 * profitability_data['CompetitionStrength'] + \10 * profitability_data['IncomeLevel'] - 2 * profitability_data['RentCost'] + \np.random.normal(0, 5000, num_locations)
+                np.random.seed(42)
+                locations = [f'Location_{i+1}' for i in range(num_locations)]
+                data = {
+                    'Location': np.random.randint(10, 100, num_locations),
+                    'Population': np.random.randint(10000, 500000, num_locations),
+                    'CompetitionStrength': np.random.uniform(0.1, 0.9, num_locations),
+                    'IncomeLevel': np.random.randint(20000, 80000, num_locations),
+                    'RentCost': np.random.randint(5000, 20000, num_locations)}
+                profitability_data = pd.DataFrame(data)
+                profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \1000 * profitability_data['CompetitionStrength'] + \10 * profitability_data['IncomeLevel'] - 2 * profitability_data['RentCost'] + \np.random.normal(0, 5000, num_locations)
             def train_profitability_model():
                 profitability_data = pd.read_csv('profitability_data.csv')
                 X = profitability_data.drop(['Location', 'Profitability'], axis=1)
