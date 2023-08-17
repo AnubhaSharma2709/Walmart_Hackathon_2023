@@ -176,15 +176,18 @@ elif section == "Store Optimization":
             X = location_data.drop(['Location'], axis=1)
             predicted_profitability = loaded_model.predict(X)[0]
             return predicted_profitability
+            
         def simulate_profit_over_5_years(initial_profit, growth_rate=0.05):
-             years = np.arange(1, 6)
+            years = np.arange(1, 6)
             profits = initial_profit * (1 + growth_rate) ** years
             return years, profits
+            
         def predict_warehouse_and_inventory(location_data):
             nearest_warehouse = np.random.choice(['Warehouse_A', 'Warehouse_B', 'Warehouse_C'])
             distance_to_warehouse = np.random.uniform(1, 10)
             recommended_inventory = location_data['Population'] * 0.02 + distance_to_warehouse * 50
             return nearest_warehouse, distance_to_warehouse, recommended_inventory.item()
+            
         def recommend_products_for_inventory(location_data, num_products=5):
             products = ['Product_A', 'Product_B', 'Product_C', 'Product_D', 'Product_E']
             demand = np.random.randint(100, 1000, len(products))
