@@ -3,7 +3,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
-
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+import pickle
+from datetime import datetime, timedelta
 
 # Front Page
 st.title("Walmart Hackathon")
@@ -16,7 +20,49 @@ section = st.sidebar.radio("Go to", ("Home", "Inventory Optimization", "Store Op
 
 if section == "Inventory Optimization":
     st.header("Inventory Optimization")
-
+    st.title("Inventory Optimization")
+    np.random.seed(42)
+    num_products = 10
+    num_stores = 5
+    demand_data = np.random.randint(10, 100, size=(num_products, num_stores))
+    holding_costs = np.random.uniform(1, 10, num_products)
+    ordering_costs = np.random.uniform(10, 100, num_products)
+    initial_inventory = np.random.randint(0, 50, num_products)
+    def objective_function(x):
+        total_cost = 0
+        for i in range(num_products):
+            total_cost += holding_costs[i] * (x[i] + initial_inventory[i])
+            for j in range(num_stores):
+                total_cost += ordering_costs[i] * max(0, demand_data[i, j] - x[i])
+        return total_cost
+    def inventory_balance_constraints(x):
+        constraints = []
+        for j in range(num_stores):
+            store_demand = demand_data[:, j]
+            store_inventory = x + initial_inventory
+            balance = np.sum(store_demand - store_inventory)
+            constraints.append(balance)
+        return constraints
+    num_years = st.number_input("Enter the number of years to optimize inventory:", value=1)
+    warehouse_names = ['Warehouse_A', 'Warehouse_B', 'Warehouse_C']
+    for warehouse in warehouse_names:
+        st.subheader(f"Optimizing inventory levels for {warehouse}:")
+    x0 = np.random.randint(0, initial_inventory + 1, num_products)
+    bounds = [(0, initial_inventory[i]) for i in range(num_products)]
+    constraints = [{'type': 'eq', 'fun': lambda x: balance} for balance in inventory_balance_constraints(x0)]
+    result = minimize(objective_function, x0, method='SLSQP', bounds=bounds, constraints=constraints)
+    optimized_inventory = result.x
+    st.write("Optimized Inventory Levels:")
+    for i, inventory in enumerate(optimized_inventory, start=1):
+        st.write(f"Product {i}: {inventory:.2f}")
+    total_optimized_cost = result.fun
+    st.write(f"Total Optimized Cost: {total_optimized_cost:.2f}")
+    plt.figure(figsize=(10, 6))
+    plt.bar(np.arange(1, num_products+1), optimized_inventory)
+    plt.xlabel('Product')
+    plt.ylabel('Optimized Inventory Level')
+    plt.title(f'Optimized Inventory Levels for {warehouse}')
+    st.pyplot(plt)
     # Add your inventory optimization code here
 
     # Display image
@@ -26,7 +72,8 @@ if section == "Inventory Optimization":
     # Explain the model and results
     st.subheader("Inventory Optimization Model")
     st.write("Explain your inventory optimization model and its approach.")
-    st.write("Accuracy of the Model: XX%")  # Replace with your accuracy
+    st.write("Accuracy of the Model: XX%")
+    # Replace with your accuracy
 
     # Add more content as needed
 
@@ -127,14 +174,40 @@ elif section == "Store Optimization":
     elif store_tabs == "Model 2":
         st.subheader("Store Optimization Model 2")
         st.write("Explain your second store optimization model and its approach.")
+        num_products = 5
+        num_prices = 10
+        num_episodes = 10
+        epsilon = 0.1
+        discount_factor = 0.95
+        learning_rate = 0.1
+        np.random.seed(42)
+        demand_data = np.random.randint(50, 200, num_products)
+        unit_costs = np.random.uniform(10, 50, num_products)
+        q_table = np.zeros((num_products, num_prices))
+        for episode in range(num_episodes):
+            state = np.random.randint(0, num_products)
+        for _ in range(num_products):
+            if np.random.uniform(0, 1) < epsilon:
+                action = np.random.randint(0, num_prices)
+        else:
+            action = np.argmax(q_table[state, :])
+            next_state = np.random.choice(num_products)
+            reward = (demand_data[state] * (action + 1)) - (unit_costs[state] * (action + 1))
+            q_table[state, action] += learning_rate * (reward + discount_factor * np.max(q_table[next_state, :]) - q_table[state, action])
+            state = next_state
+        optimal_prices = np.argmax(q_table, axis=1) + 1
+        total_revenue = sum([demand_data[i] * optimal_prices[i] - unit_costs[i] * optimal_prices[i] for i in range(num_products)])
+        st.title("Dynamic Pricing Optimization using Q-Learning")
+        st.write("Optimal Prices:", optimal_prices)
+        st.write("Total Revenue:", total_revenue)
+        plt.figure(figsize=(10, 6))
+        plt.bar(range(num_products), optimal_prices)
+        plt.xlabel('Product')
+        plt.ylabel('Optimal Price')
+        plt.title('Dynamic Pricing Optimization using Q-Learning')
+        plt.xticks(range(num_products))
+        st.pyplot(plt)
 
-    elif store_tabs == "Model 3":
-        st.subheader("Store Optimization Model 3")
-        st.write("Explain your third store optimization model and its approach.")
-
-    # Add more content as needed
-
-# Warehouse Optimization Section
 elif section == "Warehouse Optimization":
     st.header("Warehouse Optimization")
 
@@ -180,8 +253,94 @@ elif section == "Warehouse Optimization":
     elif warehouse_tabs == "Model B":
         st.subheader("Warehouse Optimization Model B")
         st.write("Explain your second warehouse optimization model and its approach.")
+        np.random.seed(42)
+        num_samples = 1000  # Number of samples
+        start_date = pd.to_datetime('2023-07-01')
+        existing_ids = set()
+        data = []
+        for _ in range(num_samples):
+            new_id = np.random.randint(1, 10001)
+            while new_id in existing_ids:
+                new_id = np.random.randint(1, 10001)
+        existing_ids.add(new_id)
+        equipment_name = np.random.choice(['Machine', 'Device', 'Unit', 'Tool', 'Apparatus', 'Instrument', 'Appliance', 'Gadget'])
+        timestamp = start_date + pd.to_timedelta(np.random.randint(1, 43201), unit='m')
+        temperature = np.random.normal(-10, 25)
+        pressure = np.random.normal(1000, 100)
+        vibration = np.random.normal(0.5, 0.1)
+        oil_level = np.random.uniform(20, 80)
+        voltage = np.random.normal(220, 10)
+        current = np.random.normal(10, 2)
+        load = np.random.normal(50, 10)
+        speed = np.random.normal(60, 10)
 
-    # Add more content as needed
+        error_codes = ['E101', 'E202', 'E303', 'E404', 'No Error']
+        error_code = np.random.choice(error_codes)
+
+        warehouse = np.random.choice(['Warehouse_A', 'Warehouse_B', 'Warehouse_C', 'Warehouse_D', 'Warehouse_E'])
+
+        maintenance_required = 1 if error_code != 'No Error' else 0
+
+        data.append([timestamp, new_id, equipment_name, temperature, pressure, vibration, oil_level,
+                 voltage, current, load, speed, error_code, maintenance_required, warehouse])
+        columns = ['Timestamp', 'Equipment_ID', 'Equipment_Name', 'Temperature', 'Pressure', 'Vibration', 'Oil_Level',
+           'Voltage', 'Current', 'Load', 'Speed', 'Error_Code', 'Maintenance_Required', 'Warehouse']
+        df = pd.DataFrame(data, columns=columns)
+        df['Date'] = df['Timestamp'].dt.date
+        df['Time'] = df['Timestamp'].dt.time
+        df.drop(columns=['Timestamp'], inplace=True)
+        X = df[['Temperature', 'Pressure', 'Vibration', 'Oil_Level', 'Voltage', 'Current', 'Load', 'Speed']]
+        y = df['Maintenance_Required']
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        model = RandomForestClassifier()
+        model.fit(X_train, y_train)
+        X_test = X_test.sample(n=10, random_state=42)  # Select a subset for testing
+        predictions = model.predict(X_test)
+        current_year = datetime.now().year
+        for idx, prediction in enumerate(predictions):
+            equipment_row = df.iloc[X_test.index[idx]]
+            equipment_name = equipment_row['Equipment_Name']
+            maintenance_required = 'Maintenance may be required.' if prediction == 1 else 'Maintenance is not immediately required.'
+        if prediction == 1:
+            estimated_year = current_year + np.random.randint(1, 6)  # Maintenance needed within 1 to 5 years
+            estimated_time = datetime.now().replace(year=estimated_year) + timedelta(days=np.random.randint(1, 366))
+            print(f"Estimated Maintenance Year: {estimated_year}")
+        else:
+            print(f"For {equipment_name}: {maintenance_required}")
+        pickle_out = open('best_model_with_time.pkl', 'wb')
+        pickle.dump(model, pickle_out)
+        pickle_out.close()
+
+        joblib.dump(model, 'best_model_with_time.joblib')
+        st.title("Equipment Maintenance Predictor")
+        st.header("Enter Equipment Data for Maintenance Prediction")
+        temperature = st.number_input("Temperature", value=20.0)
+        pressure = st.number_input("Pressure", value=1000.0)
+        vibration = st.number_input("Vibration", value=0.5)
+        oil_level = st.number_input("Oil Level", value=50.0)
+        voltage = st.number_input("Voltage", value=220.0)
+        current = st.number_input("Current", value=10.0)
+        load = st.number_input("Load", value=50.0)
+        speed = st.number_input("Speed", value=60.0)
+        predict_button = st.button("Predict Maintenance")
+        if predict_button:
+            input_data = pd.DataFrame({
+                'Temperature': [temperature],
+                'Pressure': [pressure],
+                'Vibration': [vibration],
+                'Oil_Level': [oil_level],
+                'Voltage': [voltage],
+                'Current': [current],
+                'Load': [load],
+                'Speed': [speed]})
+        prediction_results = predict_maintenance(model, input_data)
+        st.header("Maintenance Prediction Results")
+        for result in prediction_results:
+            equipment_name, maintenance_required, estimated_year = result
+        st.write(f"For {equipment_name}: {maintenance_required}")
+        if estimated_year:
+            st.write(f"Estimated Maintenance Year: {estimated_year}")
+
 
 # Home Section
 else:
