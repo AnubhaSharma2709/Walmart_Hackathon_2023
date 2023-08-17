@@ -82,9 +82,7 @@ st.markdown("---")
     #st.image(inventory_image, use_column_width=True)
 
     # Explain the model and results
-    st.subheader("Inventory Optimization Model")
-    st.write("Explain your inventory optimization model and its approach.")
-    st.write("Accuracy of the Model: XX%")
+
     # Replace with your accuracy
 
     # Add more content as needed
