@@ -447,6 +447,9 @@ elif section == "Warehouse Optimization":
                 plt.text(row['Latitude'], row['Longitude'], f"Product ID: {row['ProductID']}", fontsize=8, ha='left', va='bottom', color='black')
             plt.tight_layout()
             st.pyplot(plt)
+        if __name__ == "__main__":
+                main()
+
 
 # Home Section
 else:
