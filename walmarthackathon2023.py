@@ -24,8 +24,8 @@ if section == "Inventory Optimization":
     # Add your inventory optimization code here
 
     # Display image
-    inventory_image = "path_to_inventory_image.png"  # Replace with your image path
-    st.image(inventory_image, use_column_width=True)
+    #inventory_image = "path_to_inventory_image.png"  # Replace with your image path
+    #st.image(inventory_image, use_column_width=True)
 
     # Explain the model and results
     st.subheader("Inventory Optimization Model")
@@ -41,8 +41,8 @@ elif section == "Store Optimization":
     # Add your store optimization code here
 
     # Display image
-    store_image = "path_to_store_image.png"  # Replace with your image path
-    st.image(store_image, use_column_width=True)
+    #store_image = "path_to_store_image.png"  # Replace with your image path
+    #st.image(store_image, use_column_width=True)
 
     # Tabs for different models
     store_tabs = st.sidebar.radio("Select Model", ("Model 1", "Model 2", "Model 3"))
@@ -68,8 +68,8 @@ elif section == "Warehouse Optimization":
     # Add your warehouse optimization code here
 
     # Display image
-    warehouse_image = "path_to_warehouse_image.png"  # Replace with your image path
-    st.image(warehouse_image, use_column_width=True)
+    #warehouse_image = "path_to_warehouse_image.png"  # Replace with your image path
+    #st.image(warehouse_image, use_column_width=True)
 
     # Tabs for different models
     warehouse_tabs = st.sidebar.radio("Select Model", ("Model A", "Model B"))
