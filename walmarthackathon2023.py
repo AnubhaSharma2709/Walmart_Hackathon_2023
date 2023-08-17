@@ -46,13 +46,13 @@ elif section == "Store Optimization":
                 'CompetitionStrength': np.random.uniform(0.1, 0.9, num_locations),
                 'IncomeLevel': np.random.randint(20000, 80000, num_locations),
                 'RentCost': np.random.randint(5000, 20000, num_locations)}
-                profitability_data = pd.DataFrame(data)
-                profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \
+            profitability_data = pd.DataFrame(data)
+            profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \
                                          1000 * profitability_data['CompetitionStrength'] + \
                                          10 * profitability_data['IncomeLevel'] - \
                                          2 * profitability_data['RentCost'] + \
                                          np.random.normal(0, 5000, num_locations)
-                profitability_data.to_csv('profitability_data.csv', index=False)
+            profitability_data.to_csv('profitability_data.csv', index=False)
                 def train_profitability_model():
                     profitability_data = pd.read_csv('profitability_data.csv')
                     X = profitability_data.drop(['Location', 'Profitability'], axis=1)
