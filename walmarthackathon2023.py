@@ -148,58 +148,57 @@ elif section == "Store Optimization":
     if store_tabs == "Model 1":
         st.subheader("Store Optimization Model 1")
         st.write("Explain your first store optimization model and its approach.")
-        def generate_random_profitability_data(num_locations=100):
-            np.random.seed(42)
-            locations = [f'Location_{i+1}' for i in range(num_locations)]
-            data = {
-                'Location': np.random.randint(10, 100, num_locations),
-                'Population': np.random.randint(10000, 500000, num_locations),
-                'CompetitionStrength': np.random.uniform(0.1, 0.9, num_locations),
-                'IncomeLevel': np.random.randint(20000, 80000, num_locations),
-                'RentCost': np.random.randint(5000, 20000, num_locations)}
-            profitability_data = pd.DataFrame(data)
-            profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \
+                def main():
+                    def generate_random_profitability_data(num_locations=100):
+                        np.random.seed(42)
+                        locations = [f'Location_{i+1}' for i in range(num_locations)]
+                        data = {
+                            'Location': np.random.randint(10, 100, num_locations),
+                            'Population': np.random.randint(10000, 500000, num_locations),
+                            'CompetitionStrength': np.random.uniform(0.1, 0.9, num_locations),
+                            'IncomeLevel': np.random.randint(20000, 80000, num_locations),
+                            'RentCost': np.random.randint(5000, 20000, num_locations)}
+                        profitability_data = pd.DataFrame(data)
+                        profitability_data['Profitability'] = 1000 + 5 * profitability_data['Population'] + \
                                          1000 * profitability_data['CompetitionStrength'] + \
                                          10 * profitability_data['IncomeLevel'] - \
                                          2 * profitability_data['RentCost'] + \
                                          np.random.normal(0, 5000, num_locations)
-            profitability_data.to_csv('profitability_data.csv', index=False)
-            def train_profitability_model():
-                profitability_data = pd.read_csv('profitability_data.csv')
-                X = profitability_data.drop(['Location', 'Profitability'], axis=1)
-                y = profitability_data['Profitability']
-                model = LinearRegression()
-                model.fit(X, y)
-                joblib.dump(model, 'profitability_model.pkl')
-            def predict_profitability(location_data):
-                loaded_model = joblib.load('profitability_model.pkl')
-                X = location_data.drop(['Location'], axis=1)
-                predicted_profitability = loaded_model.predict(X)[0]
-                return predicted_profitability
-            def simulate_profit_over_5_years(initial_profit, growth_rate=0.05):
-                years = np.arange(1, 6)
-                profits = initial_profit * (1 + growth_rate) ** years
-                return years, profits
-            def predict_warehouse_and_inventory(location_data):
-                nearest_warehouse = np.random.choice(['Warehouse_A', 'Warehouse_B', 'Warehouse_C'])
-                distance_to_warehouse = np.random.uniform(1, 10)
-                recommended_inventory = location_data['Population'] * 0.02 + distance_to_warehouse * 50
-                return nearest_warehouse, distance_to_warehouse, recommended_inventory.item()
-            def recommend_products_for_inventory(location_data, num_products=5):
-                products = ['Product_A', 'Product_B', 'Product_C', 'Product_D', 'Product_E']
-                demand = np.random.randint(100, 1000, len(products))
-                unit_cost = np.random.randint(10, 100, len(products))
-                selling_price = np.random.randint(50, 200, len(products))
-                profitability = (selling_price - unit_cost) * demand
-                product_data = pd.DataFrame({
-                    'Product': products,
-                    'Demand': demand,
-                    'UnitCost': unit_cost,
-                    'SellingPrice': selling_price,
-                    'Profitability': profitability})
-                recommended_products = product_data.sort_values(by='Profitability', ascending=False).head(num_products)
-                return recommended_products
-                def main():
+                        def train_profitability_model():
+                            profitability_data = pd.read_csv('profitability_data.csv')
+                            X = profitability_data.drop(['Location', 'Profitability'], axis=1)
+                            y = profitability_data['Profitability']
+                            model = LinearRegression()
+                            model.fit(X, y)
+                            joblib.dump(model, 'profitability_model.pkl')
+                    def predict_profitability(location_data):
+                        loaded_model = joblib.load('profitability_model.pkl')
+                        X = location_data.drop(['Location'], axis=1)
+                        predicted_profitability = loaded_model.predict(X)[0]
+                        return predicted_profitability
+                    def simulate_profit_over_5_years(initial_profit, growth_rate=0.05):
+                        years = np.arange(1, 6)
+                        profits = initial_profit * (1 + growth_rate) ** years
+                        return years, profits
+                    def predict_warehouse_and_inventory(location_data):
+                        nearest_warehouse = np.random.choice(['Warehouse_A', 'Warehouse_B', 'Warehouse_C'])
+                        distance_to_warehouse = np.random.uniform(1, 10)
+                        recommended_inventory = location_data['Population'] * 0.02 + distance_to_warehouse * 50
+                        return nearest_warehouse, distance_to_warehouse, recommended_inventory.item()
+                    def recommend_products_for_inventory(location_data, num_products=5):
+                        products = ['Product_A', 'Product_B', 'Product_C', 'Product_D', 'Product_E']
+                        demand = np.random.randint(100, 1000, len(products))
+                        unit_cost = np.random.randint(10, 100, len(products))
+                        selling_price = np.random.randint(50, 200, len(products))
+                        profitability = (selling_price - unit_cost) * demand
+                        product_data = pd.DataFrame({
+                            'Product': products,
+                            'Demand': demand,
+                            'UnitCost': unit_cost,
+                            'SellingPrice': selling_price,
+                            'Profitability': profitability})
+                        recommended_products = product_data.sort_values(by='Profitability', ascending=False).head(num_products)
+                        return recommended_products
                     st.title("Warehouse Location and Inventory Recommendation")
                     generate_random_profitability_data()
                     train_profitability_model()
