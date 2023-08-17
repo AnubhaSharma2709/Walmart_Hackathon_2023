@@ -84,8 +84,8 @@ elif section == "Warehouse Optimization":
                 (df['Warehouse'] == selected_warehouse) &
                 (df['Category'] == selected_category) &
                 (df['Subcategory'] == selected_subcategory)]
-            if not selected_data.empty:
-                st.write(f"Storage Location: **{selected_data['StorageLocation'].values[0]}**")
+    if not selected_data.empty:
+        st.write(f"Storage Location: **{selected_data['StorageLocation'].values[0]}**")
 
                 # Visualization (Warehouse Location)
         plt.figure(figsize=(10, 6))
