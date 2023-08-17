@@ -102,9 +102,9 @@ elif section == "Warehouse Optimization":
         st.write("No data available for the selected criteria.")
 
 
-    elif warehouse_tabs == "Model B":
-        st.subheader("Warehouse Optimization Model B")
-        st.write("Explain your second warehouse optimization model and its approach.")
+elif warehouse_tabs == "Model B":
+    st.subheader("Warehouse Optimization Model B")
+    st.write("Explain your second warehouse optimization model and its approach.")
 
     # Add more content as needed
 
