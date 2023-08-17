@@ -220,7 +220,7 @@ elif section == "Warehouse Optimization":
     #st.image(warehouse_image, use_column_width=True)
 
     # Tabs for different models
-    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B","Model C"))
+    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B", "Model C"))
     
     if warehouse_tabs == "Warehouse Storage Location":
         from sklearn.cluster import KMeans
@@ -342,6 +342,7 @@ elif section == "Warehouse Optimization":
         st.write(f"For {equipment_name}: {maintenance_required}")
         if estimated_year:
             st.write(f"Estimated Maintenance Year: {estimated_year}")
+            
     elif warehouse_tabs =="Model C":
         np.random.seed(0)
         n_records = 1000  # 1 crore
