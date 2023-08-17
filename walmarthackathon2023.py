@@ -57,22 +57,22 @@ if section == "Inventory Optimization":
     for warehouse in warehouse_names:
         st.subheader(f"Optimizing inventory levels for {warehouse}:")
         x0 = np.random.randint(0, initial_inventory + 1, num_products)
-    bounds = [(0, initial_inventory[i]) for i in range(num_products)]
-    constraints = [{'type': 'eq', 'fun': lambda x: balance} for balance in inventory_balance_constraints(x0)]
-    result = minimize(objective_function, x0, method='SLSQP', bounds=bounds, constraints=constraints)
-    optimized_inventory = result.x
-    total_optimized_cost = result.fun
-    st.subheader("Optimized Inventory Levels:")
-    for i, inventory in enumerate(optimized_inventory, start=1):
-        st.write(f"Product {i}: {inventory:.2f}")
-    st.write(f"Total Optimized Cost: {total_optimized_cost:.2f}")
-    plt.figure(figsize=(10, 6))
-    plt.bar(np.arange(1, num_products + 1), optimized_inventory)
-    plt.xlabel('Product')
-    plt.ylabel('Optimized Inventory Level')
-    plt.title(f'Optimized Inventory Levels for {warehouse}')
-    st.pyplot(plt)
-st.markdown("---")
+        bounds = [(0, initial_inventory[i]) for i in range(num_products)]
+        constraints = [{'type': 'eq', 'fun': lambda x: balance} for balance in inventory_balance_constraints(x0)]
+        result = minimize(objective_function, x0, method='SLSQP', bounds=bounds, constraints=constraints)
+        optimized_inventory = result.x
+        total_optimized_cost = result.fun
+        st.subheader("Optimized Inventory Levels:")
+        for i, inventory in enumerate(optimized_inventory, start=1):
+            st.write(f"Product {i}: {inventory:.2f}")
+        st.write(f"Total Optimized Cost: {total_optimized_cost:.2f}")
+        plt.figure(figsize=(10, 6))
+        plt.bar(np.arange(1, num_products + 1), optimized_inventory)
+        plt.xlabel('Product')
+        plt.ylabel('Optimized Inventory Level')
+        plt.title(f'Optimized Inventory Levels for {warehouse}')
+        st.pyplot(plt)
+    st.markdown("---")
 
     
     # Add your inventory optimization code here
