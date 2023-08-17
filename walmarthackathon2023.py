@@ -59,7 +59,8 @@ if section == "Inventory Optimization":
     st.write("By employing inventory optimization strategies, supply chains achieve cost savings, better customer service, "
              "and improved overall performance. Machine learning and advanced analytics further enhance these strategies "
              "by enabling accurate demand forecasting and dynamic inventory control.")
-
+    st.header("Machine Learning Model")
+    st.subheader("Make the Necessary Predictions")
     np.random.seed(42)
     num_products = 10
     num_stores = 5
@@ -99,6 +100,7 @@ if section == "Inventory Optimization":
         plt.figure(figsize=(10, 6))
         plt.bar(np.arange(1, num_products + 1), optimized_inventory)
         plt.xlabel('Product')
+    
 
 # Store Optimization Section
 elif section == "Store Optimization":
