@@ -8,6 +8,12 @@ Original file is located at
 """
 
 import streamlit as st
+import numpy as np
+import pandas as pd
+from sklearn.cluster import KMeans  # Add this import
+import matplotlib.pyplot as plt
+import streamlit as st
+
 
 # Front Page
 st.title("Walmart Hackathon")
