@@ -151,7 +151,7 @@ elif section == "Store Optimization":
     st.write("3. **Profitability**: Through the fine-tuning of inventory levels, strategic pricing approaches, and effective product placement, stores can experience increased sales and ultimately enhanced profitability.")
     st.write("4. **Data-Informed Decisions**: Store optimization is rooted in data analysis, empowering retailers to make informed decisions that adapt to shifting market trends and evolving customer preferences.")
     st.write("5. **Competitive Edge**: Well-optimized stores have the potential to outshine competitors by offering superior customer service and an aesthetically pleasing shopping environment.")
-    store_tabs = st.sidebar.radio("Select Model", ("Location Prediction", "Model 2"))
+    store_tabs = st.sidebar.radio("Select Model", ("Location Prediction", "PricingOptimization"))
     if store_tabs == "Location Prediction":
         st.title("Store Optimization and Profitability Prediction")
         st.header("Machine Learning Model")
@@ -175,9 +175,12 @@ elif section == "Store Optimization":
         st.write("Utilizing a Neural Network for store optimization facilitates data-driven decisions regarding store modifications, openings, or closures, thereby fostering improved profitability and overall store performance.")
         st.write("It's important to note that while Neural Networks offer remarkable predictive capabilities, their implementation demands comprehensive data preprocessing, model tuning, and potentially more computational resources compared to simpler algorithms. The choice of algorithm should be tailored to the complexity and objectives of the specific store optimization task.")
 
-    elif store_tabs == "Model 2":
-        st.subheader("Store Optimization Model 2")
-        st.write("Explain your second store optimization model and its approach.")
+    elif store_tabs == "PricingOptimization":
+        st.title("Dynamic Pricing Optimization using Q-Learning")
+        st.header("Dynamic Pricing:")
+        st.write("Dynamic pricing is a strategy where prices of products or services are adjusted in real-time based on various factors, such as demand, competition, and market conditions. It allows businesses to maximize revenue by setting the optimal price at any given time, balancing customer demand and profit margins.")
+        st.header("Q-Learning:")
+        st.write("Q-learning is a model-free reinforcement learning algorithm that aims to find the optimal action-selection policy for an agent in a given environment. It learns to make decisions by updating a Q-table, which stores the expected cumulative rewards for taking specific actions in certain states.")
         num_products = 5
         num_prices = 10
         num_episodes = 10
@@ -201,7 +204,6 @@ elif section == "Store Optimization":
             state = next_state
         optimal_prices = np.argmax(q_table, axis=1) + 1
         total_revenue = sum([demand_data[i] * optimal_prices[i] - unit_costs[i] * optimal_prices[i] for i in range(num_products)])
-        st.title("Dynamic Pricing Optimization using Q-Learning")
         st.write("Optimal Prices:", optimal_prices)
         st.write("Total Revenue:", total_revenue)
         plt.figure(figsize=(10, 6))
@@ -211,18 +213,28 @@ elif section == "Store Optimization":
         plt.title('Dynamic Pricing Optimization using Q-Learning')
         plt.xticks(range(num_products))
         st.pyplot(plt)
+        st.header("Code Explanation:")
+        st.write("The provided Streamlit code illustrates the implementation of dynamic pricing optimization using Q-learning. Here's a step-by-step breakdown:")
+        st.subheader("Initialization:")
+        st.write("The code initializes various parameters, such as the number of products (num_products), number of possible prices (num_prices), number of episodes (num_episodes), exploration rate (epsilon), discount factor (discount_factor), and learning rate (learning_rate).")
+        st.subheader("Random Data Generation:")
+        st.write("Random data is generated for product demand (demand_data), and unit costs (unit_costs).")
+        st.subheader("Q-Table Initialization:")
+        st.write("A Q-table is initialized with zeros to store expected cumulative rewards for actions in different states.")
+        st.subheader("Q-Learning Loop:")
+        st.write("The core of the code is the Q-learning loop (for episode in range(num_episodes)). It simulates episodes where the agent (retailer) interacts with the environment (market) to learn optimal pricing strategies.")
+        st.write("- The agent starts in a random state (state), which represents a product.")
+        st.write("- For each product, the agent decides whether to explore (randomly choose an action) or exploit (choose the action with the highest expected reward from the Q-table).")
+        st.write("- The agent selects an action (price) and transitions to a new state (next_state) based on the chosen action.")
+        st.write("- The agent receives a reward based on the chosen action, demand for the product, and unit costs.")
+        st.write("- The Q-table is updated using the Q-learning equation, incorporating the reward, discount factor, and potential future rewards.")
+        st.subheader("Optimal Prices and Total Revenue:")
+        st.write("After learning, the algorithm determines the optimal prices for each product (optimal_prices) by selecting the action (price) that yields the highest expected reward for each state (product). The total revenue (total_revenue) is calculated based on the optimal prices and product demand.")
 
 elif section == "Warehouse Optimization":
     st.header("Warehouse Optimization")
 
-    # Add your warehouse optimization code here
-
-    # Display image
-    #warehouse_image = "path_to_warehouse_image.png"  # Replace with your image path
-    #st.image(warehouse_image, use_column_width=True)
-
-    # Tabs for different models
-    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B", "Model C"))
+    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse", " Maintenance Prediction", "OptmizingWarehouseStorage"))
     
     if warehouse_tabs == "Warehouse Storage Location":
         from sklearn.cluster import KMeans
