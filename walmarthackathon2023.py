@@ -73,7 +73,6 @@ elif section == "Warehouse Optimization":
 
     # Tabs for different models
     warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
-    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
     
     if warehouse_tabs == "Warehouse Storage Location":
         np.random.seed(0)
