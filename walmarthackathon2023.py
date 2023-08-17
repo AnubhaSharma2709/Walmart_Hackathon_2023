@@ -330,7 +330,7 @@ elif section == "Warehouse Optimization":
         for _ in range(num_samples):
             new_id = np.random.randint(1, 1001)
         while new_id in existing_ids:
-        new_id = np.random.randint(1, 1001)
+            new_id = np.random.randint(1, 1001)
         
         existing_ids.add(new_id)
     
