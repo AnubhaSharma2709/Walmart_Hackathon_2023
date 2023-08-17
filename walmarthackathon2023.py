@@ -245,7 +245,7 @@ elif section == "Warehouse Optimization":
     st.write("5. **Cost Savings**: Efficient layouts minimize unnecessary movement of goods and personnel, reducing operational costs and improving resource allocation.")
 
 
-    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse", "Maintenance Prediction", "OptmizingWarehouseStorage"))
+    warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse", "OptmizingWarehouseStorage"))
     
     if warehouse_tabs == "Warehouse":
         st.header("Warehouse Layout Optimization:")
@@ -296,26 +296,6 @@ elif section == "Warehouse Optimization":
         st.write("In summary, warehouse layout optimization using KMeans clustering assists in strategically organizing products within a warehouse to improve operational efficiency, reduce costs, and enhance overall supply chain performance. The visualization provides a clear understanding of how products and warehouses are arranged, facilitating better decision-making for warehouse management.")
 
 
-    elif warehouse_tabs == "Maintenance Prediction":
-        st.header("Predictive Maintenance Importance:")
-        st.write("Predictive maintenance is a proactive approach that uses data analysis and machine learning algorithms to predict when equipment or machinery is likely to fail. By identifying potential issues before they lead to costly breakdowns, predictive maintenance helps organizations optimize maintenance schedules, reduce downtime, and enhance overall operational efficiency. Here's why predictive maintenance is crucial and how it contributes to various aspects:")
-        st.subheader("Importance of Predictive Maintenance:")
-        st.markdown("1. **Cost Savings**: Predictive maintenance minimizes unscheduled downtime, which can lead to substantial financial losses due to halted operations, decreased productivity, and emergency repairs.")
-        st.markdown("2. **Increased Equipment Lifespan**: By addressing issues before they escalate, predictive maintenance helps extend the lifespan of equipment, reducing the need for frequent replacements.")
-        st.markdown("3. **Efficient Resource Allocation**: Maintenance efforts are targeted based on actual equipment condition, optimizing the allocation of resources such as labor, parts, and maintenance schedules.")
-        st.markdown("4. **Improved Safety**: Anticipating equipment failures helps mitigate safety risks associated with sudden breakdowns, protecting both personnel and assets.")
-        st.markdown("5. **Data-Driven Insights**: Predictive maintenance generates valuable data insights that can be used to fine-tune maintenance strategies, improve equipment design, and optimize operational processes.")
-        st.markdown("6. **Enhanced Customer Satisfaction**: Reliable equipment and uninterrupted service contribute to better customer satisfaction and loyalty.")
-        
-        image1 = "predict_image.png"
-        st.image(image1, caption='Local Image', use_column_width=True)
-
-        st.write("Machine Learning Model: Random Forest Classifier")
-        st.write("The machine learning model used in this app is a Random Forest Classifier. "
-         "The Random Forest algorithm is an ensemble learning technique that constructs multiple decision trees "
-         "during training and combines their predictions to make a final decision. It is suitable for classification "
-         "tasks, such as predicting whether maintenance is needed for equipment based on sensor readings.")
-        
 
 
     elif warehouse_tabs =="OptmizingWarehouseStorage":
