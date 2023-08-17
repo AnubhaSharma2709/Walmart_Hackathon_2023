@@ -202,6 +202,7 @@ elif section == "Store Optimization":
                 'Profitability': profitability})
             recommended_products = product_data.sort_values(by='Profitability', ascending=False).head(num_products)
             return recommended_products
+            
             def main():
                 st.title("Warehouse Location and Inventory Recommendation")
                 generate_random_profitability_data()
@@ -237,8 +238,8 @@ elif section == "Store Optimization":
                 plt.xticks(rotation=45)
                 plt.tight_layout()
                 st.pyplot(plt)
-    if __name__ == "__main__":
-            main()
+            if __name__ == "__main__":
+                 main()
 
     elif store_tabs == "Model 2":
         st.subheader("Store Optimization Model 2")
