@@ -10,7 +10,6 @@ Original file is located at
 import streamlit as st
 import numpy as np
 import pandas as pd
-from sklearn.cluster import KMeans  # Add this import
 import matplotlib.pyplot as plt
 import streamlit as st
 
@@ -81,6 +80,7 @@ elif section == "Warehouse Optimization":
     warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
     
     if warehouse_tabs == "Warehouse Storage Location":
+        from sklearn.cluster import KMeans
         np.random.seed(42)
         num_products = 100
         num_warehouses = 5
