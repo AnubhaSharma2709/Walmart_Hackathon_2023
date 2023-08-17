@@ -375,7 +375,8 @@ elif section == "Warehouse Optimization":
             (df['Subcategory'] == selected_subcategory)]
             
             if not selected_data.empty:
-            st.write(f"Storage Location: **{selected_data['StorageLocation'].values[0]}**")
+                st.write(f"Storage Location: **{selected_data['StorageLocation'].values[0]}**")
+                
             plt.figure(figsize=(10, 6))
             plt.scatter(selected_data['Latitude'], selected_data['Longitude'], c=selected_data['StorageLocation'], cmap='viridis', marker='o')
             plt.title(f'Scatter Plot of Warehouse: {selected_warehouse}, Category: {selected_category}, Subcategory: {selected_subcategory}')
