@@ -303,6 +303,10 @@ elif section == "Warehouse Optimization":
         st.markdown("4. **Improved Safety**: Anticipating equipment failures helps mitigate safety risks associated with sudden breakdowns, protecting both personnel and assets.")
         st.markdown("5. **Data-Driven Insights**: Predictive maintenance generates valuable data insights that can be used to fine-tune maintenance strategies, improve equipment design, and optimize operational processes.")
         st.markdown("6. **Enhanced Customer Satisfaction**: Reliable equipment and uninterrupted service contribute to better customer satisfaction and loyalty.")
+        
+        image1 = "predict_image.png"
+        st.image(image1, caption='Local Image', use_column_width=True)
+
         st.write("Machine Learning Model: Random Forest Classifier")
         st.write("The machine learning model used in this app is a Random Forest Classifier. "
          "The Random Forest algorithm is an ensemble learning technique that constructs multiple decision trees "
