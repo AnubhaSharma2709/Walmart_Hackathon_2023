@@ -75,7 +75,7 @@ elif section == "Warehouse Optimization":
     warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
     
     if warehouse_tabs == "Warehouse Storage Location":
-        np.random.seed(0)
+        np.random.seed(42)
         num_products = 100
         num_warehouses = 5
         product_ids = np.arange(num_products)
