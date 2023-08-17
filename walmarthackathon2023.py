@@ -74,41 +74,32 @@ elif section == "Warehouse Optimization":
     # Tabs for different models
     warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
     warehouse_tabs = st.sidebar.radio("Select Model", ("Warehouse Storage Location", "Model B"))
-        
-        if warehouse_tabs == "Warehouse Storage Location":
-            st.subheader("Warehouse Optimization Model A")
-            st.write("Explain your first warehouse optimization model and its approach.")
-            
-            # Warehouse Location Visualization
-            selected_warehouse = st.selectbox("Select a Warehouse:", warehouses)
-            selected_category = st.selectbox("Select a Category:", categories)
-            selected_subcategory = st.selectbox("Select a Subcategory:", subcategories)
-            
-            selected_data = df[
+    if warehouse_tabs == "Warehouse Storage Location":
+        st.subheader("Warehouse Storage Location")
+        st.write("Explain your first warehouse optimization model and its approach.")
+        selected_warehouse = st.selectbox("Select a Warehouse:", warehouses)
+        selected_category = st.selectbox("Select a Category:", categories)
+        selected_subcategory = st.selectbox("Select a Subcategory:", subcategories)
+        selected_data = df[
                 (df['Warehouse'] == selected_warehouse) &
                 (df['Category'] == selected_category) &
-                (df['Subcategory'] == selected_subcategory)
-            ]
-
+                (df['Subcategory'] == selected_subcategory)]
             if not selected_data.empty:
                 st.write(f"Storage Location: **{selected_data['StorageLocation'].values[0]}**")
-                
-                # Visualization (Warehouse Location)
-                plt.figure(figsize=(10, 6))
-                plt.scatter(selected_data['Latitude'], selected_data['Longitude'], c=selected_data['StorageLocation'], cmap='viridis', marker='o')
-                plt.title(f'Scatter Plot of Warehouse: {selected_warehouse}, Category: {selected_category}, Subcategory: {selected_subcategory}')
-                plt.xlabel('Latitude')
-                plt.ylabel('Longitude')
-                plt.colorbar(label='Storage Location')
 
-                for index, row in selected_data.iterrows():
-                    plt.text(row['Latitude'], row['Longitude'], f"Product ID: {row['ProductID']}", fontsize=8, ha='left', va='bottom', color='black')
-                
-                plt.tight_layout()
-                st.pyplot(plt)
-                
-            else:
-                st.write("No data available for the selected criteria.")
+                # Visualization (Warehouse Location)
+        plt.figure(figsize=(10, 6))
+        plt.scatter(selected_data['Latitude'], selected_data['Longitude'], c=selected_data['StorageLocation'], cmap='viridis', marker='o')
+        plt.title(f'Scatter Plot of Warehouse: {selected_warehouse}, Category: {selected_category}, Subcategory: {selected_subcategory}')
+        plt.xlabel('Latitude')
+        plt.ylabel('Longitude')
+        plt.colorbar(label='Storage Location')
+        for index, row in selected_data.iterrows():
+            plt.text(row['Latitude'], row['Longitude'], f"Product ID: {row['ProductID']}", fontsize=8, ha='left', va='bottom', color='black')
+        plt.tight_layout()
+        st.pyplot(plt)
+    else:
+        st.write("No data available for the selected criteria.")
 
 
     elif warehouse_tabs == "Model B":
